@@ -1,0 +1,26 @@
+{
+  "name": "aibot",
+  "version": "1.0.0",
+  "description": "AI client bot",
+  "main": "index.js",
+  "repository": "https://github.com/warlord9808/bot.git",
+  "author": "Umid Ghimire",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
+    "prettier": "^2.5.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css}": [
+      "prettier --write",
+      "eslint --fix src/",
+      "git add"
+    ]
+  }
+}
