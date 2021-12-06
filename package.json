@@ -6,7 +6,19 @@
   "repository": "https://github.com/warlord9808/bot.git",
   "author": "Umid Ghimire",
   "license": "MIT",
+  "scripts": {
+    "start": "node ./index.js",
+    "dev": "concurrently \"cd server && yarn dev\" \"cd client && yarn start\"",
+    "addnode": "concurrently \"cd server && rm -rf node_modules && yarn install\" \"cd client && rm -rf node_modules && yarn install\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "devDependencies": {
+    "eslint": "^7.11.0",
+    "eslint-config-airbnb": "^19.0.1",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.2",
     "prettier": "^2.5.0"
@@ -17,11 +29,14 @@
     }
   },
   "lint-staged": {
-    "*": [
+    "*.js": [
       "prettier --write",
       "eslint --fix client/src/",
-      "eslint --fix server/",
       "git add"
     ]
+  },
+  "dependencies": {
+    "concurrently": "^6.4.0",
+    "mongoose": "^6.0.14"
   }
 }
