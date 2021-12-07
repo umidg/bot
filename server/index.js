@@ -4,22 +4,21 @@ const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
 
-// require("./models/User");
-// require("./models/Chat");
-
 mongoose.connect(process.env.MONGODB_URL, {});
 
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error: '));
-db.once('open', () => {
-  console.log('Connected successfully');
-});
+try {
+  db.on('error', console.error.bind(console, 'connection error: '));
+  db.once('open', () => {
+    console.log('Connected successfully');
+  });
+} catch (err) {
+  console.log(err, 'error while connecting');
+}
 
 const app = express();
-
 app.use(bodyParser.json());
-
-// require("./routes/auth")(app);
+require('./routes/auth')(app);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('../client/build'));
