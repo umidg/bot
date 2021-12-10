@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-const chatSchema = new Schema({
+const chatTimeSchema = new Schema({
   id: {
     type: String,
   },
@@ -16,4 +16,4 @@ const chatSchema = new Schema({
   },
 });
 
-mongoose.model('Chat', chatSchema);
+mongoose.model('Chat', chatTimeSchema);

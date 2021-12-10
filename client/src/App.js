@@ -1,8 +1,13 @@
 import Routers from "./router";
-import "./App.css";
 
 function App() {
-  return <Routers></Routers>;
+  return (
+    <div class="flex h-screen">
+      <div class="m-auto w-2/6">
+        <Routers></Routers>
+      </div>
+    </div>
+  );
 }
 
 export default App;

@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 mongoose.connect(process.env.MONGODB_URL, {});
 
@@ -17,7 +18,9 @@ try {
 }
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
+
 require('./routes/auth')(app);
 
 if (process.env.NODE_ENV === 'production') {
@@ -27,7 +30,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const PORT = process.env.PORT || 3500;
+const PORT = process.env.PORT || 5002;
 app.listen(PORT, () => {
   console.log('Listening on port', PORT);
 });

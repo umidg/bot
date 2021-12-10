@@ -34,12 +34,22 @@ module.exports = (app) => {
       User.findOne({ email }, async (err, user) => {
         if (err) throw err;
         if (!user || !user.email) {
-          res.status(401).send();
+          res.status(200).send({
+            status: false,
+            data: {
+              message: 'No user found',
+            },
+          });
           return;
         }
         const isMatch = await bcrypt.compare(password, user.password);
         if (isMatch) {
-          res.redirect('/chatHome');
+          res.status(200).send({
+            status: true,
+            data: {
+              message: 'Authorized',
+            },
+          });
         } else {
           res.status(401).send();
         }
