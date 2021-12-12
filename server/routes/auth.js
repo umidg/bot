@@ -48,6 +48,7 @@ module.exports = (app) => {
             status: true,
             data: {
               message: 'Authorized',
+              user,
             },
           });
         } else {

@@ -11,10 +11,13 @@ const Login = () => {
   });
 
   const loginButtonClick = () => {
-    localStorage.setItem("user", JSON.stringify(loginState));
+    const user = Object.assign({ amount: 0 }, loginState);
+    localStorage.setItem("user", JSON.stringify(user));
     getApi(`${loginState.signup ? "signup" : "login"}`, loginState).then(
       (data) => {
         if (data && data.status) {
+          loginState.signup &&
+            localStorage.setItem("user", JSON.stringify(data.user));
           navigate("/chatHome");
         }
       }

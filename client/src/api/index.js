@@ -1,5 +1,5 @@
 import axios from "axios";
-const SERVER_URL = "http://localhost:5002/";
+const SERVER_URL = "http://localhost:5003/";
 
 export const getApi = async (url, data, method = "POST") => {
   return await axios({

@@ -5,7 +5,10 @@ const chatTimeSchema = new Schema({
   id: {
     type: String,
   },
-  engagements: {
+  user: {
+    type: String,
+  },
+  engagement: {
     type: String,
   },
   dropoff: {
@@ -16,4 +19,4 @@ const chatTimeSchema = new Schema({
   },
 });
 
-mongoose.model('Chat', chatTimeSchema);
+module.exports = mongoose.model('Chat', chatTimeSchema);

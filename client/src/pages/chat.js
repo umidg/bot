@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import { getApi } from "../api/index";
 
 const Chat = () => {
+  let navigate = useNavigate();
   const [chatState, setchatState] = useState({
-    user: JSON.parse(localStorage.getItem("user")),
+    user: localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user"))
+      : {},
     messages: {},
     message: "",
     amount: 0,
+    uuid: uuidv4(),
   });
 
   const sendMessage = () => {
@@ -17,12 +23,31 @@ const Chat = () => {
 
   const addAmount = () => {};
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (!chatState.user || !chatState.user.email) {
+      navigate("/auth");
+    }
+  }, []);
 
   return (
     <div>
-      {console.log(chatState)}
-      <div>Your current balance XXX.XX</div>
+      <div className="fixed right-4 top-0">
+        <p
+          className="text-lg underline italic text-red-400 cursor-pointer"
+          onClick={() => {
+            localStorage.setItem("user", null);
+            navigate("/auth");
+          }}
+        >
+          Log out
+        </p>
+      </div>
+      <div>
+        Your current balance{" "}
+        {chatState.user && chatState.user.amount
+          ? chatState.user.amount
+          : "0.0"}
+      </div>
       <div className="flex mb-20">
         <label
           className="block text-grey-darker text-sm font-bold mb-2"

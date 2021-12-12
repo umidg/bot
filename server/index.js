@@ -22,6 +22,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 require('./routes/auth')(app);
+require('./routes/chat')(app);
+require('./routes/add')(app);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('../client/build'));
@@ -30,7 +32,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.PORT || 5003;
 app.listen(PORT, () => {
   console.log('Listening on port', PORT);
 });

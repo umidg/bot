@@ -10,6 +10,7 @@ const userSchema = new Schema({
   },
   amount: {
     type: String,
+    default: '0.00',
   },
 });
 
